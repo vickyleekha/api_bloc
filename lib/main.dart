@@ -1,6 +1,7 @@
 import 'package:api_bloc/bloc/bloc_event.dart';
 import 'package:api_bloc/bloc/bloc_state.dart';
-import 'package:api_bloc/bloc/transaction_bloc.dart';
+import 'package:api_bloc/bloc/api_bloc.dart';
+import 'package:api_bloc/model/CovidModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -42,7 +43,8 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    apiBloc.add(const GetLogin(path: "/GodImages?pageSize=30"));
+    // apiBloc.add(const GetLogin(path: "/GodImages?pageSize=30"));
+    apiBloc.add(GetCovidList());
   }
 
   Widget bloc() {
@@ -82,7 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class MyStatefulWidget extends StatefulWidget {
-  final List<dynamic> data;
+  final CovidModel data;
   const MyStatefulWidget({super.key, required this.data});
 
   @override
