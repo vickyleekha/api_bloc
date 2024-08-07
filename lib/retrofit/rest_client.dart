@@ -1,10 +1,11 @@
 import 'dart:developer';
 
+import 'package:api_bloc/model/CovidModel.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 part 'rest_client.g.dart';
 
-const String baseUrl1 = "";
+const String baseUrl1 = "https://api.covid19api.com";
 
 @RestApi(baseUrl: baseUrl1)
 abstract class RestClient {
@@ -36,8 +37,11 @@ abstract class RestClient {
     return _RestClient(dio, baseUrl: baseUrl);
   }
 
-  @GET("/data{path}")
-  Future<List<dynamic>> getLogin(@Path("path") String path);
+  @GET("/summary")
+  Future<CovidModel> fetchCovidList();
+
+  // @GET("/data{path}")
+  // Future<List<dynamic>> getLogin(@Path("path") String path);
 
   // @POST("/UploadChemistOrderEasyChem")
   // Future<dynamic> uploadChemistOrderEasyChem(

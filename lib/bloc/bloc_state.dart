@@ -1,3 +1,4 @@
+import 'package:api_bloc/model/CovidModel.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class BlocState extends Equatable {
@@ -13,7 +14,7 @@ class Initial extends BlocState {}
 class Loading extends BlocState {}
 
 class Loaded extends BlocState {
-  final List<dynamic> data;
+  final CovidModel data;
   const Loaded({required this.data});
 }
 

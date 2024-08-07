@@ -9,10 +9,27 @@ class ApiBloc extends Bloc<BlocEvent, BlocState> {
   ApiBloc() : super(Initial()) {
     final ApiRepository apiRepository = ApiRepository();
 
-    on<GetLogin>((event, emit) async {
+    //   on<GetLogin>((event, emit) async {
+    //     try {
+    //       emit(Loading());
+    //       final mList = await apiRepository.fetchLogin(event.path);
+
+    //       if (mList.data == null) {
+    //         ServerError error = mList.getException;
+    //         emit(Error(error.getErrorMessage()));
+    //       } else {
+    //         emit(Loaded(data: mList.data!));
+    //       }
+    //     } on NetworkError {
+    //       emit(const Error("Failed to fetch data. is your device online?"));
+    //     }
+    //   });
+    // }
+
+    on<GetCovidList>((event, emit) async {
       try {
         emit(Loading());
-        final mList = await apiRepository.fetchLogin(event.path);
+        final mList = await apiRepository.fetchCovidList();
 
         if (mList.data == null) {
           ServerError error = mList.getException;

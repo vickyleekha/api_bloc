@@ -10,28 +10,44 @@ part of 'rest_client.dart';
 
 class _RestClient implements RestClient {
   _RestClient(this._dio, {this.baseUrl}) {
-    baseUrl ??= '';
+    baseUrl ??= 'https://api.covid19api.com';
   }
 
   final Dio _dio;
 
   String? baseUrl;
 
+  // @override
+  // Future<List<dynamic>> getLogin(path) async {
+  //   const extra = <String, dynamic>{};
+  //   final queryParameters = <String, dynamic>{};
+  //   final headers = <String, dynamic>{};
+  //   final data = <String, dynamic>{};
+  //   final result = await _dio.fetch<List<dynamic>>(
+  //       _setStreamType<List<dynamic>>(
+  //           Options(method: 'GET', headers: headers, extra: extra)
+  //               .compose(_dio.options, '/data${path}',
+  //                   queryParameters: queryParameters, data: data)
+  //               .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+  //   var value = result.data!;
+  //   // .map((dynamic i) => d.fromJson(i as Map<String, dynamic>))
+  //   // .toList();
+  //   return value;
+  // }
+
   @override
-  Future<List<dynamic>> getLogin(path) async {
-    const extra = <String, dynamic>{};
+  Future<CovidModel> fetchCovidList() async {
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final headers = <String, dynamic>{};
-    final data = <String, dynamic>{};
-    final result = await _dio.fetch<List<dynamic>>(
-        _setStreamType<List<dynamic>>(
-            Options(method: 'GET', headers: headers, extra: extra)
-                .compose(_dio.options, '/data${path}',
-                    queryParameters: queryParameters, data: data)
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<CovidModel>(
+            Options(method: 'GET', headers: _headers, extra: _extra)
+                .compose(_dio.options, '/summary',
+                    queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    var value = result.data!;
-    // .map((dynamic i) => d.fromJson(i as Map<String, dynamic>))
-    // .toList();
+    final value = CovidModel.fromJson(_result.data!);
     return value;
   }
 

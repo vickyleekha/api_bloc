@@ -14,3 +14,5 @@ class GetLogin extends BlocEvent {
 
   const GetLogin({required this.path});
 }
+
+class GetCovidList extends BlocEvent {}
